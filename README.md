@@ -2,7 +2,7 @@
 
 Hi there :wave:
 
-Welcome to SWE 574 - Fall 2022 repository.
+Welcome to SWE 599 - Fall 2022 repository.
 
 The Authors of this repository:
 - Cem Kurtoglu
