@@ -3,3 +3,4 @@
 *.pyc
 /data/
 /migrations/
+/healthcare_app/migrations/
