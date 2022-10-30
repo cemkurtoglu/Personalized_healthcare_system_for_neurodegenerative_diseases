@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=neurodegenerative
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+  web:
+    build:
+      context: .
+    command: >
+      sh -c "python ./wait_for_db.py &&
+             python ./manage.py makemigrations &&
+             python ./manage.py migrate &&
+             python ./manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./Personalized_healthcare_system_for_neurodegenerative_diseases:/Personalized_healthcare_system_for_neurodegenerative_diseases
+      - ./data/web:/vol/web
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=db
+      - DB_NAME=neurodegenerative
+      - DB_PASSWORD=admin
+      - DB_USER=admin
+#      - SECRET_KEY=developmentSecretKey
+      - DEBUG=1
+    depends_on:
+      - db
