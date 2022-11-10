@@ -8,3 +8,9 @@ class MainForm(forms.ModelForm):
         model = Health_Record
         fields = '__all__'
 
+    def custom_save(self, user):
+        lv = self.save(commit=False)
+        lv.created_by = user
+        lv.save()
+        return lv
+

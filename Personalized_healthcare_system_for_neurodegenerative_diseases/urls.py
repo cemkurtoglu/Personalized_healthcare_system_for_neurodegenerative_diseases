@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from healthcare_app.views import home_view, results_view
+from healthcare_app.views import home_view, results_view, post_form
+
+app_name = 'healthcare_app'
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home_view'),
-    path('result/<int:patient_record_id>', results_view, name='results_view')
+    path('result/<int:patient_record_id>', results_view, name='results_view'),
+    path('api/post_form/', post_form, name='post_form')
 
 ]
