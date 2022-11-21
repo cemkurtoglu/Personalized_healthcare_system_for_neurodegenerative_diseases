@@ -18,10 +18,10 @@
 <body>
 
 <div class="container">
-    <h1 style="margin-top: 30px; margin-bottom: 30px">Bootstrap Table</h1>
-    <p> The patient {{ patient_record.first_name }} {{ patient_record.last_name }} has a SOMETHING PERCENT risk of having dimentia.</p>
-    <p> The possibility of having type SOMETHING DISEASE is SOMETHING PERCENT </p>
-    <p> These patients records have 80% and above similarity rate to the patient {{ patient_record.first_name }} {{ patient_record.last_name }}</p>
+    <h1 style="margin-top: 30px; margin-bottom: 30px">Patient Records Table</h1>
+    <p> The patient {{ patient_record.first_name }} {{ patient_record.last_name }} has a <a href="#">Api Result In Percentage</a> risk of having dimentia.</p>
+    <p> The possibility of having type <a href="#">Disease Type</a> is <a href="#">Api Result In Percentage</a> </p>
+    <p> These patients records have <a href="#">Api Result In Percentage</a> and above similarity rate to the patient {{ patient_record.first_name }} {{ patient_record.last_name }}</p>
 
 
     <table id="table"
@@ -47,7 +47,7 @@
         {% for record in records %}
             <tr>
                 <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                <td>{{ record.id }}</td>
+                <td><a href="{% url 'results_view' patient_record_id=record.id %}">{{ record.id }}</a></td>
                 <td>{{ record.rid }}</td>
                 <td>{{ record.first_name }}</td>
                 <td>{{ record.last_name }}</td>
