@@ -1,10 +1,14 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+from .serializers import Health_RecordSerializer
 
 from .models import Health_Record
-
-
+from scripts import eval
 # Create your views here.
 from healthcare_app.forms import MainForm
 
@@ -14,7 +18,6 @@ def home_view(request):
 
 
 def results_view(request, patient_record_id):
-
     patient_record = Health_Record.objects.get(id=patient_record_id)
     records = Health_Record.objects.all()
     field_names = [f.name for f in Health_Record._meta.get_fields()]
@@ -75,7 +78,7 @@ def post_form(request):
             "whole_brain": whole_brain,
             "entorhinal": entorhinal,
             "fusiform": fusiform,
-            "midtemp": mid_temp,
+            "mid_temp": mid_temp,
             "icv": icv,
             "diagnosis": diagnosis
         }
@@ -84,7 +87,7 @@ def post_form(request):
         print(form.errors)
         if form.is_valid():
             instance = form.custom_save(request.user)
-            return JsonResponse({'message': 'success', 'id':instance.id})
+            return JsonResponse({'message': 'success', 'id': instance.id})
     else:
         form = MainForm(request.POST)
         print(form.errors)
@@ -94,3 +97,20 @@ def post_form(request):
         })
 
 
+# APIs
+
+@api_view(['GET'])
+def get_data(request):
+    records = Health_Record.objects.all()
+    serializer = Health_RecordSerializer(records, many=True)
+
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def generate_prediction(request):
+    serializer = Health_RecordSerializer(data=request.data, many=True)
+    if serializer.is_valid(raise_exception=True):
+        output = eval.run(serializer.data)
+        return Response(output)
+    return Response(serializer.data)

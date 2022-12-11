@@ -31,7 +31,7 @@ class Health_Record(models.Model):
     whole_brain = models.IntegerField(blank=False, null=False)
     entorhinal = models.IntegerField(blank=False, null=False)
     fusiform = models.IntegerField(blank=False, null=False)
-    midtemp = models.IntegerField(blank=False, null=False)
+    mid_temp = models.IntegerField(blank=False, null=False)
     icv = models.IntegerField(blank=False, null=False)
     diagnosis = models.CharField(max_length=250, blank=False, null=False)
 

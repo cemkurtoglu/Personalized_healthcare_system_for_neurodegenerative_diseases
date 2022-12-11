@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<head >
+<head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,32 +17,32 @@
 <div class="container">
     <h1 style="text-align: center">Boun Health App</h1>
 
-    <form enctype="multipart/form-data" method="POST">
+    <form enctype="multipart/form-data" id="health_record_form" action="" method="POST">
         {% csrf_token %}
 
         <div class="form-group">
             <label for="rid">RID</label>
-            <input type="number" class="form-control" id="rid" placeholder="12345" required />
+            <input type="number" class="form-control" id="rid" placeholder="12345" required/>
         </div>
 
         <div class="form-group">
             <label for="first_name">First Name</label>
-            <input type="text" class="form-control" id="first_name" placeholder="Cem" required />
+            <input type="text" class="form-control" id="first_name" placeholder="Cem" required/>
         </div>
 
         <div class="form-group">
             <label for="last_name">Last Name</label>
-            <input type="text" class="form-control" id="last_name" placeholder="Kurtoglu" required />
+            <input type="text" class="form-control" id="last_name" placeholder="Kurtoglu" required/>
         </div>
 
         <div class="form-group">
             <label for="birth_date">Birth Date</label>
-            <input type="date" class="form-control" id="birth_date" placeholder="20.12.1990" required />
+            <input type="date" class="form-control" id="birth_date" placeholder="20.12.1990" required/>
         </div>
 
         <div class="form-group">
             <label for="gender">Gender</label>
-            <select class="form-control" id="gender" required >
+            <select class="form-control" id="gender" required>
                 <option value="Male" selected>Male</option>
                 <option value="Female">Female</option>
             </select>
@@ -50,7 +50,7 @@
 
         <div class="form-group">
             <label for="marital_status">Marital Status</label>
-            <select class="form-control" id="marital_status" required >
+            <select class="form-control" id="marital_status" required>
                 <option value="Never Married" selected>Never Married</option>
                 <option value="Married">Married</option>
                 <option value="Widowed">Widowed</option>
@@ -60,89 +60,89 @@
 
         <div class="form-group">
             <label for="exam_date">Exam Date</label>
-            <input type="date" class="form-control" id="exam_date" placeholder="20.12.1990" required />
+            <input type="date" class="form-control" id="exam_date" placeholder="20.12.1990" required/>
         </div>
         <div class="form-group">
             <label for="cdrsb">CDRSB</label>
-            <input type="number" step="0.01" class="form-control" id="cdrsb" placeholder="0.5" required />
+            <input type="number" step="0.01" class="form-control" id="cdrsb" placeholder="0.5" required/>
         </div>
         <div class="form-group">
             <label for="adas11">ADAS11</label>
-            <input type="number" step="0.01" class="form-control" id="adas11" placeholder="0.5" required />
+            <input type="number" step="0.01" class="form-control" id="adas11" placeholder="0.5" required/>
         </div>
         <div class="form-group">
             <label for="adas13">ADAS13</label>
-            <input type="number" step="0.01" class="form-control" id="adas13" placeholder="0.5" required />
+            <input type="number" step="0.01" class="form-control" id="adas13" placeholder="0.5" required/>
         </div>
 
         <div class="form-group">
             <label for="mmse">MMSE</label>
-            <input type="number" class="form-control" id="mmse" placeholder="29" required />
+            <input type="number" class="form-control" id="mmse" placeholder="29" required/>
         </div>
 
         <div class="form-group">
             <label for="ravlt_immediate">RAVLT_immediate</label>
-            <input type="number" class="form-control" id="ravlt_immediate" placeholder="29" required />
+            <input type="number" class="form-control" id="ravlt_immediate" placeholder="29" required/>
         </div>
 
         <div class="form-group">
             <label for="RAVLT_learning">RAVLT_learning</label>
-            <input type="number" class="form-control" id="ravlt_learning" placeholder="5" required />
+            <input type="number" class="form-control" id="ravlt_learning" placeholder="5" required/>
         </div>
 
         <div class="form-group">
             <label for="RAVLT_forgetting">RAVLT_forgetting</label>
-            <input type="number" class="form-control" id="ravlt_forgetting" placeholder="5" required />
+            <input type="number" class="form-control" id="ravlt_forgetting" placeholder="5" required/>
         </div>
 
         <div class="form-group">
             <label for="faq">FAQ</label>
-            <input type="number" class="form-control" id="faq" placeholder="5" required />
+            <input type="number" class="form-control" id="faq" placeholder="5" required/>
         </div>
 
         <div class="form-group">
             <label for="ventricles">Ventricles</label>
-            <input type="number" class="form-control" id="ventricles" placeholder="29225" required />
+            <input type="number" class="form-control" id="ventricles" placeholder="29225" required/>
         </div>
 
         <div class="form-group">
             <label for="Hippocampus">Hippocampus</label>
-            <input type="number" class="form-control" id="hippocampus" placeholder="7744" required />
+            <input type="number" class="form-control" id="hippocampus" placeholder="7744" required/>
         </div>
 
         <div class="form-group">
             <label for="WholeBrain">Whole Brain</label>
-            <input type="number" class="form-control" id="whole_brain" placeholder="1166710" required />
+            <input type="number" class="form-control" id="whole_brain" placeholder="1166710" required/>
         </div>
 
         <div class="form-group">
             <label for="Entorhinal">Entorhinal</label>
-            <input type="number" class="form-control" id="entorhinal" placeholder="3251" required />
+            <input type="number" class="form-control" id="entorhinal" placeholder="3251" required/>
         </div>
 
         <div class="form-group">
             <label for="Fusiform">Fusiform</label>
-            <input type="number" class="form-control" id="fusiform" placeholder="18989" required />
+            <input type="number" class="form-control" id="fusiform" placeholder="18989" required/>
         </div>
 
         <div class="form-group">
             <label for="MidTemp">Mid Temp</label>
-            <input type="number" class="form-control" id="mid_temp" placeholder="20715" required />
+            <input type="number" class="form-control" id="mid_temp" placeholder="20715" required/>
         </div>
 
         <div class="form-group">
             <label for="ICV">ICV</label>
-            <input type="number" class="form-control" id="icv" placeholder="1668230" required />
+            <input type="number" class="form-control" id="icv" placeholder="1668230" required/>
         </div>
 
         <div class="form-group">
             <label for="Diagnosis">Diagnosis</label>
-            <input type="text" class="form-control" id="diagnosis" placeholder="MCI" required />
+            <input type="text" class="form-control" id="diagnosis" placeholder="MCI" required/>
         </div>
 
         <small id="message-content"></small>
 
-        <button type="submit" id="submit" class="btn btn-primary mb-2">Submit Form</button>
+        <button type="submit" value="Submit" id="submit" class="btn btn-primary mb-2">Submit Form</button>
 
     </form>
 
@@ -152,9 +152,9 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script
-  src="https://code.jquery.com/jquery-3.6.1.js"
-  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-  crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -163,10 +163,28 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+
 <script type="text/javascript">
-        let submitFunc =  $('#submit').on('click', function (e) {
-            e.preventDefault();
-            setTimeout((function () {
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    let submitFunc = $('#health_record_form').on('submit', function (e) {
+        e.preventDefault();
+        setTimeout((function () {
             const csrfmiddlewaretoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
             $.ajax({
                 type: "POST",
@@ -203,16 +221,68 @@
                 success: function (response) {
                     console.log(response)
 
-                    if(response['message'] === 'success'){
+                    if (response['message'] === 'success') {
                         console.log("success log /n")
                         let customId = parseInt(response['id'])
                         console.log(response)
                         console.log(customId)
-                        window.location.href = 'result/'+ response.id, true;
+                        window.location.href = 'result/' + response.id
+                        $.ajax({
+                type: "POST",
+                url: '{% url 'generate_prediction' %}',
+                enctype: 'multipart/form-data',
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"),
+                    "Accept": "application/json",
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify([{
+                    'rid': $("#rid").val() || '',
+                    'first_name': $("#first_name").val().trim() || '',
+                    'last_name': $("#last_name").val().trim() || '',
+                    'birth_date': $("#birth_date").val().trim() || '',
+                    'gender': $("#gender").val().trim() || '',
+                    'marital_status': $("#marital_status").val().trim() || '',
+                    'exam_date': $("#exam_date").val().trim() || '',
+                    'cdrsb': $("#cdrsb").val() || '',
+                    'adas11': $("#adas11").val().trim() || '',
+                    'adas13': $("#adas13").val().trim() || '',
+                    'mmse': $("#mmse").val().trim() || '',
+                    'ravlt_immediate': $("#ravlt_immediate").val().trim() || '',
+                    'ravlt_learning': $("#ravlt_learning").val().trim() || '',
+                    'ravlt_forgetting': $("#ravlt_forgetting").val().trim() || '',
+                    'faq': $("#faq").val().trim() || '',
+                    'ventricles': $("#ventricles").val().trim() || '',
+                    'hippocampus': $("#hippocampus").val().trim() || '',
+                    'whole_brain': $("#whole_brain").val().trim() || '',
+                    'entorhinal': $("#entorhinal").val().trim() || '',
+                    'fusiform': $("#fusiform").val().trim() || '',
+                    'mid_temp': $("#mid_temp").val().trim() || '',
+                    'icv': $("#icv").val().trim() || '',
+                    'diagnosis': $("#diagnosis").val().trim() || '',
+
+                }]),
+
+
+                success: function (response) {
+                    console.log(response)
+                    alert(response)
+
+
+                },
+                error: function (error) {
+                    console.log(error);
+                    console.log(this.data)
+
+
+                }
+            });
+
+
 
                     } else {
                         const small = document.getElementById('message-content');
-                        small.innerText = "Something went wrong" ;
+                        small.innerText = "Something went wrong";
 
                     }
 
@@ -220,12 +290,13 @@
                 },
                 error: function (error) {
                     console.log(error);
-                     const small = document.getElementById('message-content');
+                    const small = document.getElementById('message-content');
                     small.innerText = error;
 
                 }
             });
-        }),800);
+
+        }), 800);
 
 
     })
