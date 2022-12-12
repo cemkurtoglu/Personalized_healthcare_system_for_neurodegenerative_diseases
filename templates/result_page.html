@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
     <base target="_top">
     <meta charset="utf-8">
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
+    <title>Results</title>
 
     <?!= include('table-css'); ?>
     <?!= include('table-js'); ?>
@@ -19,9 +20,12 @@
 
 <div class="container">
     <h1 style="margin-top: 30px; margin-bottom: 30px">Patient Records Table</h1>
-    <p> The patient {{ patient_record.first_name }} {{ patient_record.last_name }} has a <a href="#">Api Result In Percentage</a> risk of having dimentia.</p>
-    <p> The possibility of having type <a href="#">Disease Type</a> is <a href="#">Api Result In Percentage</a> </p>
-    <p> These patients records have <a href="#">Api Result In Percentage</a> and above similarity rate to the patient {{ patient_record.first_name }} {{ patient_record.last_name }}</p>
+    <p> The patient {{ patient_record.first_name }} {{ patient_record.last_name }} has a <strong><a
+            href="#">{{ probability }} % </a> </strong>risk of having dimentia.</p>
+    <p> The possibility of having type <strong> <a href="#">{{ prediction }}</a> </strong> is <strong> <a
+            href="#">{{ probability }} % </a> </strong> . </p>
+    <p> These patients records have <a href="#">Api Result In Percentage</a> and above similarity rate to the
+        patient {{ patient_record.first_name }} {{ patient_record.last_name }}</p>
 
 
     <table id="table"

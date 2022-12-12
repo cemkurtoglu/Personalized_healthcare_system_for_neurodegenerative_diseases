@@ -4,3 +4,5 @@
 /data/
 /migrations/
 /healthcare_app/migrations/
+/AI/output.json
+/AI/data.json

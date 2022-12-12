@@ -27,6 +27,6 @@ urlpatterns = [
     path('result/<int:patient_record_id>', results_view, name='results_view'),
     path('api/post_form/', post_form, name='post_form'),
     path('api/get_data', get_data, name='get_data'),
-    path('api/generate_prediction', generate_prediction, name='generate_prediction')
+    path('api/generate_prediction/<int:patient_record_id>', generate_prediction, name='generate_prediction')
 
 ]

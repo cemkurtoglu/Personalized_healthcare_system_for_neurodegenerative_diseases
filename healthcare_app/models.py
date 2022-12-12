@@ -1,15 +1,17 @@
-
 import django
 from django.conf import settings
 from django.db import models
 from django.utils.timezone import now
+
+
 # Create your models here.
 
 
 class Health_Record(models.Model):
-
-    gender_choices = [('Male','Male'), ('Female', 'Female')]
-    marital_choices = [('Never Married','Never Married'), ('Married', 'Married'), ('Widowed', 'Widowed'), ('Divorced', 'Divorced')]
+    gender_choices = [('Male', 'Male'), ('Female', 'Female')]
+    marital_choices = [('Never Married', 'Never Married'), ('Married', 'Married'), ('Widowed', 'Widowed'),
+                       ('Divorced', 'Divorced')]
+    disease_choices = [('0', 'MCI'), ('1', 'AD')]
 
     rid = models.IntegerField(blank=False, null=False)
     first_name = models.CharField(max_length=250, blank=False, null=False)
@@ -35,6 +37,11 @@ class Health_Record(models.Model):
     icv = models.IntegerField(blank=False, null=False)
     diagnosis = models.CharField(max_length=250, blank=False, null=False)
 
-    def __str__(self):
-        return str(self.id) + "-"+str(self.rid)
+    prediction = models.CharField(max_length=250, choices=disease_choices, blank=True, null=True)
+    probability = models.FloatField(blank=True, null=True)
 
+    def get_prediction(self):
+        return dict(self.disease_choices).get(self.prediction)
+
+    def __str__(self):
+        return str(self.id) + "-" + str(self.rid)

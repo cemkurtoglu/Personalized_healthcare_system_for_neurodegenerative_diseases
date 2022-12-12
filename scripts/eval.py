@@ -68,9 +68,9 @@ def run(serializer):
                       "probability": str(probabilities[i][predictions[i]])}
         output.append(dictionary)
 
-    with open("AI/output.json", "w") as outfile:
-        json.dump(output, outfile)
+    # with open("AI/output.json", "w") as outfile:
+    #     json.dump(output, outfile)
 
-    print(output)
+    # print(output)
 
     return output

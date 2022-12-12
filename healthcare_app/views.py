@@ -21,11 +21,21 @@ def results_view(request, patient_record_id):
     patient_record = Health_Record.objects.get(id=patient_record_id)
     records = Health_Record.objects.all()
     field_names = [f.name for f in Health_Record._meta.get_fields()]
+    if patient_record.probability and patient_record.prediction:
+        probability = patient_record.probability * 100
+        prediction = patient_record.get_prediction()
+    else:
+        probability = 0
+        prediction = "No Prediction Data"
+
+    print(prediction)
 
     context = {
         'patient_record': patient_record,
         'field_names': field_names,
-        'records': records
+        'records': records,
+        'probability': probability,
+        'prediction': prediction
     }
 
     return render(request, 'result_page.html', context)
@@ -108,9 +118,13 @@ def get_data(request):
 
 
 @api_view(['POST'])
-def generate_prediction(request):
+def generate_prediction(request, patient_record_id):
     serializer = Health_RecordSerializer(data=request.data, many=True)
     if serializer.is_valid(raise_exception=True):
         output = eval.run(serializer.data)
+        health_record = Health_Record.objects.get(id=patient_record_id)
+        health_record.prediction = output[0]['prediction']
+        health_record.probability = output[0]['probability']
+        health_record.save(update_fields=["prediction", "probability"])
         return Response(output)
     return Response(serializer.data)
