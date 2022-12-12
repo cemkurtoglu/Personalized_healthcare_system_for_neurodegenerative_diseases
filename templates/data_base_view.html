@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
+    <title>Results</title>
+
+    <?!= include('table-css'); ?>
+    <?!= include('table-js'); ?>
+
+</head>
+<body>
+
+<div class="container">
+    <h1 style="margin-top: 30px; margin-bottom: 30px">Patient Records Table</h1>
+    <p>Go through all the patient records</p>
+    <p>Available commands are:</p>
+    <ul>
+        <li>< number: smaller than</li>
+        <li>> number: bigger than</li>
+        <li>basic search for filtering</li>
+
+
+    </ul>
+
+    <button id="ai-prediction-button">Update all ai predictions</button>
+
+
+    <table id="table"
+           data-toggle="table"
+           data-search="true"
+           data-filter-control="true"
+           data-show-export="false"
+           data-click-to-select="true"
+           data-toolbar="#toolbar">
+        <thead>
+        <h9>Record count is: {{ records.count }}</h9>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            {% for field_name in field_names %}
+                <th data-field="{{ field_name }}" data-filter-control="input" data-sortable="true">{{ field_name }}</th>
+            {% endfor %}
+
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {% for record in records %}
+            <tr>
+                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                <td><a href="{% url 'results_view' patient_record_id=record.id %}">{{ record.id }}</a></td>
+                <td>{{ record.rid }}</td>
+                <td>{{ record.first_name }}</td>
+                <td>{{ record.last_name }}</td>
+                <td>{{ record.birth_date }}</td>
+                <td>{{ record.gender }}</td>
+                <td>{{ record.marital_status }}</td>
+                <td>{{ record.exam_date }}</td>
+                <td>{{ record.cdrsb }}</td>
+                <td>{{ record.adas11 }}</td>
+                <td>{{ record.adas13 }}</td>
+                <td>{{ record.mmse }}</td>
+                <td>{{ record.ravlt_immediate }}</td>
+                <td>{{ record.ravlt_learning }}</td>
+                <td>{{ record.ravlt_forgetting }}</td>
+                <td>{{ record.faq }}</td>
+                <td>{{ record.ventricles }}</td>
+                <td>{{ record.hippocampus }}</td>
+                <td>{{ record.whole_brain }}</td>
+                <td>{{ record.entorhinal }}</td>
+                <td>{{ record.fusiform }}</td>
+                <td>{{ record.midtemp }}</td>
+                <td>{{ record.icv }}</td>
+                <td>{{ record.diagnosis }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.17.1/bootstrap-table.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.17.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script>
+    init({
+        title: 'Filter Control',
+        desc: 'Use Plugin: bootstrap-table-filter-control to filter table fields.',
+        links: [
+            'bootstrap-table.min.css'
+        ],
+        scripts: [
+            'bootstrap-table.min.js',
+            'extensions/filter-control/bootstrap-table-filter-control.min.js'
+        ]
+    })
+</script>
+<script
+        src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    let submitFunc = $('#ai-prediction-button').on('click', function (e) {
+        e.preventDefault();
+        setTimeout((function () {
+            $.ajax({
+                type: "POST",
+                url: '{% url 'generate_prediction_for_all' %}',
+                enctype: 'multipart/form-data',
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"),
+                    "Accept": "application/json",
+                    'Content-Type': 'application/json'
+                },
+
+
+                success: function (response) {
+                    alert("The database is updated!!")
+
+                },
+                error: function (error) {
+                    console.log(error)
+
+                }
+            });
+
+        }), 800);
+
+
+    })</script>
+
+<script>
+    var $table = $('#table');
+    $(function () {
+        $('#toolbar').find('select').change(function () {
+            $table.bootstrapTable('refreshOptions', {
+                exportDataType: $(this).val()
+            });
+        });
+    })
+
+    var trBoldBlue = $("table");
+
+    $(trBoldBlue).on("click", "tr", function () {
+        $(this).toggleClass("bold-blue");
+    });
+</script>
+
+</html>

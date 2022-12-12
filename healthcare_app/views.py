@@ -1,3 +1,6 @@
+import json
+
+from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -14,7 +17,21 @@ from healthcare_app.forms import MainForm
 
 
 def home_view(request):
+    return render(request, 'home.html')
+
+
+def form_view(request):
     return render(request, 'main_form.html')
+
+
+def patients_view(request):
+    records = Health_Record.objects.all()
+    field_names = [f.name for f in Health_Record._meta.get_fields()]
+    context = {
+        'field_names': field_names,
+        'records': records,
+    }
+    return render(request, 'data_base_view.html', context)
 
 
 def results_view(request, patient_record_id):
@@ -107,6 +124,19 @@ def post_form(request):
         })
 
 
+@api_view(['POST'])
+def generate_prediction_for_all(request):
+    records = Health_Record.objects.values()
+    if records:
+        for record in records:
+            record_array = [record]
+            output = eval.run(record_array)
+            health_record = Health_Record.objects.get(id=record.get("id"))
+            health_record.prediction = output[0]['prediction']
+            health_record.probability = output[0]['probability']
+            health_record.save(update_fields=["prediction", "probability"])
+    return JsonResponse(serialize('json', Health_Record.objects.all()), status=201, safe=False)
+
 # APIs
 
 @api_view(['GET'])
@@ -128,3 +158,5 @@ def generate_prediction(request, patient_record_id):
         health_record.save(update_fields=["prediction", "probability"])
         return Response(output)
     return Response(serializer.data)
+
+

@@ -16,17 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from healthcare_app.views import home_view, results_view, post_form, get_data, generate_prediction
+from healthcare_app.views \
+    import home_view, results_view, post_form, get_data, generate_prediction, form_view, patients_view \
+    , generate_prediction_for_all
 
 app_name = 'healthcare_app'
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home_view'),
+    path('form/', form_view, name='form_view'),
+    path('patients/', patients_view, name='patients_view'),
     path('result/<int:patient_record_id>', results_view, name='results_view'),
     path('api/post_form/', post_form, name='post_form'),
     path('api/get_data', get_data, name='get_data'),
-    path('api/generate_prediction/<int:patient_record_id>', generate_prediction, name='generate_prediction')
+    path('api/generate_prediction/<int:patient_record_id>', generate_prediction, name='generate_prediction'),
+    path('api/generate_prediction_for_all', generate_prediction_for_all, name='generate_prediction_for_all')
 
 ]
