@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        {#body {#}
+        {#    display: flex;#}
+        {#    flex-direction: column;#}
+        {#    justify-content: center;#}
+        {#    align-items: center;#}
+        {#    min-height: 100vh;#}
+        {#    margin: 0 15px;#}
+        {#    background: #333a4d;#}
+        {#}#}
+
+        * {
+            font-family: "Roboto", sans-serif;
+        }
+
+        /*INFO SECTION - CIRCLE GRAPH*/
+        .info_section {
+            padding: 30px;
+            background: #fafafa;
+            margin: 15px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            max-width: 960px;
+        }
+
+        .graph-circle {
+            position: relative;
+        }
+
+        .circle-graph-container {
+            position: relative;
+            display: flex;
+        }
+
+        .circle-graph {
+            margin: 0 15px;
+            position: relative;
+            width: 50%;
+            line-height: 1.2 !important;
+            -webkit-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0px;
+        }
+
+        .stats {
+            width: 100% !important;
+            margin: 0 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stats p {
+            line-height: 1.2;
+            font-size: 21px;
+            color: #545454;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+
+        span.info_section_wordHighlight {
+            color: #003A79;
+            font-weight: 600;
+        }
+
+    </style>
+    <script
+            src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+            crossorigin="anonymous"></script>
+    <script src="https://rendro.github.io/easy-pie-chart/javascripts/jquery.easy-pie-chart.js"></script>
+
+</head>
+<body>
+
+<div class="info">
+    <div class="info_section">
+        <section class="graph-circle">
+            <div class="circle-graph-container">
+                <div class="circle-graph easyPieChart" data-percent="10"
+                     style="width: 150px; height: 150px; line-height: 150px;">
+                    <p>10%</p>
+                    <canvas width="269" height="269" style="width: 150px; height: 150px;"></canvas>
+                </div>
+                <div class="stats easyPieChart" style="width: 150px; height: 150px; line-height: 150px;">
+                    <p class="stat-1">
+                        ONLY <span class="info_section_wordHighlight">10% </span>OF AMERICANS THINK THEY WILL HAVE
+                        ENOUGH $ FOR RETIREMENT
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+</body>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.circle-graph').easyPieChart({
+            scaleColor: false,
+            lineWidth: 20,
+            lineCap: 'butt',
+            barColor: '#003A79',
+            trackColor: '#cccccc',
+            size: 150,
+            animate: 800
+        });
+    });
+</script>
+</html>
