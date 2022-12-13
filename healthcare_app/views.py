@@ -5,6 +5,9 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics, filters
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -32,6 +35,10 @@ def patients_view(request):
         'records': records,
     }
     return render(request, 'data_base_view.html', context)
+
+
+def patient_record_view(request):
+    return render(request, 'patient_record.html')
 
 
 def results_view(request, patient_record_id):
@@ -124,19 +131,6 @@ def post_form(request):
         })
 
 
-@api_view(['POST'])
-def generate_prediction_for_all(request):
-    records = Health_Record.objects.values()
-    if records:
-        for record in records:
-            record_array = [record]
-            output = eval.run(record_array)
-            health_record = Health_Record.objects.get(id=record.get("id"))
-            health_record.prediction = output[0]['prediction']
-            health_record.probability = output[0]['probability']
-            health_record.save(update_fields=["prediction", "probability"])
-    return JsonResponse(serialize('json', Health_Record.objects.all()), status=201, safe=False)
-
 # APIs
 
 @api_view(['GET'])
@@ -160,3 +154,24 @@ def generate_prediction(request, patient_record_id):
     return Response(serializer.data)
 
 
+@api_view(['POST'])
+def generate_prediction_for_all(request):
+    records = Health_Record.objects.values()
+    if records:
+        for record in records:
+            record_array = [record]
+            output = eval.run(record_array)
+            health_record = Health_Record.objects.get(id=record.get("id"))
+            health_record.prediction = output[0]['prediction']
+            health_record.probability = output[0]['probability']
+            health_record.save(update_fields=["prediction", "probability"])
+    return JsonResponse(serialize('json', Health_Record.objects.all()), status=201, safe=False)
+
+
+class Health_RecordListView(generics.ListAPIView):
+    queryset = Health_Record.objects.all()
+    serializer_class = Health_RecordSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['rid', 'first_name', 'last_name']
