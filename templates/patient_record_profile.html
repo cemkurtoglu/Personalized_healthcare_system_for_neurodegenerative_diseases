@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+            name="description"
+            content="swe 573 projet, co-learn web application"
+    />
+
+    <title>Patient Record</title>
+
+    <style>
+        {#body {#}
+        {#    display: flex;#}
+        {#    flex-direction: column;#}
+        {#    justify-content: center;#}
+        {#    align-items: center;#}
+        {#    min-height: 100vh;#}
+        {#    margin: 0 15px;#}
+        {#    background: #333a4d;#}
+        {
+        #}#}
+
+        * {
+            font-family: "Roboto", sans-serif;
+        }
+
+        /*INFO SECTION - CIRCLE GRAPH*/
+        .info_section {
+            padding: 30px;
+            background: #fafafa;
+            margin: 15px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            max-width: 960px;
+        }
+
+        .graph-circle {
+            position: relative;
+        }
+
+        .circle-graph-container {
+            position: relative;
+            display: flex;
+        }
+
+        .circle-graph {
+            margin: 0 15px;
+            position: relative;
+            width: 50%;
+            line-height: 1.2 !important;
+            -webkit-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0px;
+        }
+
+        .stats {
+            width: 100% !important;
+            margin: 0 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stats p {
+            line-height: 1.2;
+            font-size: 21px;
+            color: #545454;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+
+        span.info_section_wordHighlight {
+            color: #003A79;
+            font-weight: 600;
+        }
+
+    </style>
+     <script
+            src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+            crossorigin="anonymous"></script>
+    <script src="https://rendro.github.io/easy-pie-chart/javascripts/jquery.easy-pie-chart.js"></script>
+
+
+    <!-- Bootstrap CSS -->
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+    />
+</head>
+<body>
+
+<main role="main" class="container py-5 bg-light">
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <aside class="col-md-12">
+                    <div class="card mb-4 box-shadow">
+                        <img
+                                class="card-img-top"
+                                style="max-width: 400px; width: 100%"
+                                src="{% static 'media/default_profile_image.jpeg' %}"
+                                alt="Profile Picture"
+                        />
+                        <div class="card-body">
+                            <h4>{{ patient.first_name }} {{ patient.last_name }}</h4>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-4 box-shadow">
+                                <div
+                            class="card-header d-flex justify-content-between align-items-center"
+                    >
+                        <h4 class="my-0 font-weight-normal">AI Results</h4>
+                    </div>
+                <div class="info">
+                    <div class="info_section">
+                        <section class="graph-circle">
+                            <div class="circle-graph-container">
+                                <div class="circle-graph easyPieChart" data-percent="{{ probability }}"
+                                     style="width: 150px; height: 150px; line-height: 150px;">
+                                    <p>{{ probability }}%</p>
+                                    <canvas width="269" height="269" style="width: 150px; height: 150px;"></canvas>
+                                </div>
+                                <div class="stats easyPieChart"
+                                     style="width: 150px; height: 150px; line-height: 150px;">
+                                    <p class="stat-1">
+                                        PATIENT HAS <span class="info_section_wordHighlight">{{ probability }}% </span>OF
+                                        CHANCE TO HAVE {{ prediction }} TYPE DEMENTIA
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+                <div class="card mb-4 box-shadow">
+                    <div
+                            class="card-header d-flex justify-content-between align-items-center"
+                    >
+                        <h4 class="my-0 font-weight-normal">Patient Treatment Files</h4>
+                    </div>
+                    <div class="card-body">{{ bio }}</div>
+                </div>
+                <div class="card mb-4 box-shadow">
+                    <div
+                            class="card-header d-flex justify-content-between align-items-center"
+                    >
+                        <h4 class="my-0 font-weight-normal">Background</h4>
+                    </div>
+                    <div class="card-body">{{ background }}</div>
+                </div>
+
+
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="my-0 font-weight-normal">Patient Record</h4>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Name</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.first_name }} {{ patient.last_name }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Birth Date</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.birth_date }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Gender</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.gender }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Marital Status</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.marital_status }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Exam Date</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.exam_date }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0"> CDRSB</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.cdrsb }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">ADAS11</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.adas11 }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">ADAS13</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.adas13 }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">MMSE</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.mmse }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">RAVLT_LEARNING</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.ravlt_learning }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">RAVLY_FORGETTING</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.ravlt_forgetting }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">FAQ</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.faq }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Ventricles</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.ventricles }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Hippocampus</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.hippocampus }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Whole Brain</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.whole_brain }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Entorhinal</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.entorhinal }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">MID TEMP</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.icv }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Diagnosis</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ patient.diagnosis }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Prediction</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ prediction }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"><h6 class="mb-0">Probability</h6></div>
+                            <div class="col-sm-9 text-secondary"> {{ probability }}</div>
+                        </div>
+
+
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $(function () {
+        $('.circle-graph').easyPieChart({
+            scaleColor: false,
+            lineWidth: 20,
+            lineCap: 'butt',
+            barColor: '#003A79',
+            trackColor: '#cccccc',
+            size: 150,
+            animate: 800
+        });
+    });
+</script>
+</body>
+</html>

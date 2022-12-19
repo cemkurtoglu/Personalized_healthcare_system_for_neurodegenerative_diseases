@@ -51,7 +51,7 @@
         {% for record in records %}
             <tr>
                 <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                <td><a href="{% url 'results_view' patient_record_id=record.id %}">{{ record.id }}</a></td>
+                <td><a href="{% url 'patient_record_view' patient_id=record.id %}">{{ record.id }}</a></td>
                 <td>{{ record.rid }}</td>
                 <td>{{ record.first_name }}</td>
                 <td>{{ record.last_name }}</td>
@@ -72,9 +72,11 @@
                 <td>{{ record.whole_brain }}</td>
                 <td>{{ record.entorhinal }}</td>
                 <td>{{ record.fusiform }}</td>
-                <td>{{ record.midtemp }}</td>
+                <td>{{ record.mid_temp }}</td>
                 <td>{{ record.icv }}</td>
                 <td>{{ record.diagnosis }}</td>
+                <td>{{ record.prediction }}</td>
+                <td>{{ record.probability }}</td>
             </tr>
 
         {% endfor %}

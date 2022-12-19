@@ -37,8 +37,25 @@ def patients_view(request):
     return render(request, 'data_base_view.html', context)
 
 
-def patient_record_view(request):
-    return render(request, 'patient_record.html')
+def patient_record_view(request, patient_id):
+
+    record = Health_Record.objects.get(id=patient_id)
+    probability = 0
+    prediction = ""
+    if record.probability and record.prediction:
+        probability = record.probability * 100
+        prediction = record.get_prediction()
+    else:
+        probability = 0
+        prediction = "No Prediction Data"
+
+    context = {
+        'patient': record,
+        'probability': probability,
+        'prediction': prediction
+    }
+
+    return render(request, 'patient_record_profile.html', context)
 
 
 def results_view(request, patient_record_id):
