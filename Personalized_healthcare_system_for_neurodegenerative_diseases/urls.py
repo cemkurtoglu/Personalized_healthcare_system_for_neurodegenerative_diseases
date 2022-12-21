@@ -18,7 +18,7 @@ from django.urls import path
 
 from healthcare_app.views \
     import home_view, results_view, post_form, get_data, generate_prediction, form_view, patients_view \
-    , generate_prediction_for_all, patient_record_view, Health_RecordListView
+    , generate_prediction_for_all, patient_record_view, Health_RecordListView, patient_search_view
 
 app_name = 'healthcare_app'
 
@@ -29,6 +29,7 @@ urlpatterns = [
     path('patients/', patients_view, name='patients_view'),
     path('patient/<int:patient_id>', patient_record_view, name='patient_record_view'),
     path('result/<int:patient_record_id>', results_view, name='results_view'),
+    path('search_patient/', patient_search_view, name='patient_search_view'),
     path('api/post_form/', post_form, name='post_form'),
     path('api/get_data', get_data, name='get_data'),
     path('api/generate_prediction/<int:patient_record_id>', generate_prediction, name='generate_prediction'),

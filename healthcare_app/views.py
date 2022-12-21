@@ -3,6 +3,7 @@ import json
 from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
+from django.template.defaulttags import register
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, filters
@@ -37,11 +38,13 @@ def patients_view(request):
     return render(request, 'data_base_view.html', context)
 
 
-def patient_record_view(request, patient_id):
+def patient_search_view(request):
+    return render(request, 'patient_search.html')
 
+
+def patient_record_view(request, patient_id):
     record = Health_Record.objects.get(id=patient_id)
-    probability = 0
-    prediction = ""
+
     if record.probability and record.prediction:
         probability = record.probability * 100
         prediction = record.get_prediction()
@@ -62,21 +65,11 @@ def results_view(request, patient_record_id):
     patient_record = Health_Record.objects.get(id=patient_record_id)
     records = Health_Record.objects.all()
     field_names = [f.name for f in Health_Record._meta.get_fields()]
-    if patient_record.probability and patient_record.prediction:
-        probability = patient_record.probability * 100
-        prediction = patient_record.get_prediction()
-    else:
-        probability = 0
-        prediction = "No Prediction Data"
-
-    print(prediction)
 
     context = {
         'patient_record': patient_record,
         'field_names': field_names,
         'records': records,
-        'probability': probability,
-        'prediction': prediction
     }
 
     return render(request, 'result_page.html', context)
@@ -191,4 +184,4 @@ class Health_RecordListView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['rid', 'first_name', 'last_name']
+    search_fields = ['first_name', 'last_name']

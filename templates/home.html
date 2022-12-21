@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Pricing example · Bootstrap v5.2</title>
+    <title>Boun Healthcare</title>
 
 
     <!-- Bootstrap CSS -->
@@ -25,6 +25,10 @@
 </svg>
 
 <div class="container py-3">
+    <nav class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="/"> <-- </a>
+
+</nav>
     <header>
         <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
@@ -87,7 +91,7 @@
                             <li>patient treatment</li>
                             <li>records</li>
                         </ul>
-                        <a href="#" class="w-100 btn btn-lg btn-outline-primary">Go to patient record</a>
+                        <a href="{% url 'patient_search_view' %}" class="w-100 btn btn-lg btn-outline-primary">Go to patient record</a>
                     </div>
                 </div>
             </div>

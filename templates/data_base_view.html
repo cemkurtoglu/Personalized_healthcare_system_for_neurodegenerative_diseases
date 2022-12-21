@@ -17,6 +17,11 @@
 
 </head>
 <body>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="/"> <-- </a>
+
+</nav>
 
 <div class="container">
     <h1 style="margin-top: 30px; margin-bottom: 30px">Patient Records Table</h1>
@@ -56,7 +61,7 @@
         {% for record in records %}
             <tr>
                 <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                <td><a href="{% url 'results_view' patient_record_id=record.id %}">{{ record.id }}</a></td>
+                <td><a href="{% url 'patient_record_view' patient_id=record.id %}">{{ record.id }}</a></td>
                 <td>{{ record.rid }}</td>
                 <td>{{ record.first_name }}</td>
                 <td>{{ record.last_name }}</td>
@@ -77,9 +82,11 @@
                 <td>{{ record.whole_brain }}</td>
                 <td>{{ record.entorhinal }}</td>
                 <td>{{ record.fusiform }}</td>
-                <td>{{ record.midtemp }}</td>
+                <td>{{ record.mid_temp }}</td>
                 <td>{{ record.icv }}</td>
                 <td>{{ record.diagnosis }}</td>
+                <td>{{ record.prediction}}</td>
+                <td>{% widthratio record.probability 1 100 %}</td>
             </tr>
 
         {% endfor %}
