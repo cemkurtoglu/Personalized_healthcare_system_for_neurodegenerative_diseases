@@ -17,4 +17,11 @@ I will be updating this readme as I progress. Keep an eye here and do not forget
 
 ### How to deploy?
 
-/To do...
+- Clone this repo locally
+- Install Docker and Docker Compose. (If you are on Windows/MacOS, you can download Docker Desktop)
+- Inside the project root, run docker-compose build && docker-compose up
+
+#### Populate dummy data
+
+- Go to the Docker cli and at the project level run this command:
+-  `python manage.py runscript load_data`

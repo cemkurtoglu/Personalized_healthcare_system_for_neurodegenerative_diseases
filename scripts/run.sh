@@ -10,4 +10,5 @@ python ./manage.py collectstatic --noinput
 # Run migrations to ensure that database is updated to the latest version.
 python ./manage.py makemigrations &&
   python ./manage.py migrate &&
+  python ./manage.py collectstatic &&
   python ./manage.py runserver 0.0.0.0:8000

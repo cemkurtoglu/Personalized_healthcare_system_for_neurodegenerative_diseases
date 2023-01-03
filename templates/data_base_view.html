@@ -1,4 +1,5 @@
 {% load static %}
+{% load tag_prediction %}
 <!DOCTYPE html>
 <html lang="">
 <head>
@@ -85,7 +86,7 @@
                 <td>{{ record.mid_temp }}</td>
                 <td>{{ record.icv }}</td>
                 <td>{{ record.diagnosis }}</td>
-                <td>{{ record.prediction}}</td>
+                <td>{{ record.prediction | get_prediction_name }}</td>
                 <td>{% widthratio record.probability 1 100 %}</td>
             </tr>
 

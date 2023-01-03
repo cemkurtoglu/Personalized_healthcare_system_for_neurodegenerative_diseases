@@ -63,11 +63,24 @@ def patient_record_view(request, patient_id):
 
 def results_view(request, patient_record_id):
     patient_record = Health_Record.objects.get(id=patient_record_id)
-    records = Health_Record.objects.all()
+    # records = Health_Record.objects.all()
     field_names = [f.name for f in Health_Record._meta.get_fields()]
+
+    if patient_record.probability and patient_record.prediction:
+        probability = patient_record.probability * 100
+        prediction = patient_record.get_prediction()
+    else:
+        probability = 0
+        prediction = "No Prediction Data"
+    records = Health_Record.objects\
+        .filter(prediction=patient_record.prediction)\
+        .filter(diagnosis=prediction)\
+        .filter(probability__gte=.99)
 
     context = {
         'patient_record': patient_record,
+        'probability': probability,
+        'prediction': prediction,
         'field_names': field_names,
         'records': records,
     }
@@ -181,7 +194,8 @@ def generate_prediction_for_all(request):
 class Health_RecordListView(generics.ListAPIView):
     queryset = Health_Record.objects.all()
     serializer_class = Health_RecordSerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication, SessionAuthentication]
+    # permission_classes = [IsAuthenticated]
+
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['first_name', 'last_name']

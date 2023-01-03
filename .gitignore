@@ -6,3 +6,7 @@
 /healthcare_app/migrations/
 /AI/output.json
 /AI/data.json
+/static/admin/
+/static/django_extensions/
+/static/rest_framework/
+/static/staticfiles.json

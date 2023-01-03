@@ -119,13 +119,14 @@
                         <img
                                 class="card-img-top"
                                 style="max-width: 400px; width: 100%"
-                                src="{% static 'media/default_profile_image.jpeg' %}"
+                                src="{% static '/media/default_profile_image.jpeg' %}"
                                 alt="Profile Picture"
                         />
                         <div class="card-body">
                             <h4>{{ patient.first_name }} {{ patient.last_name }}</h4>
                         </div>
                     </div>
+                    <button id="button-go-to-comparison" onclick="window.location.href='/result/' + {{ patient.id }};" class="btn-primary btn-sm"> Go to comparison </button>
                 </aside>
             </div>
         </div>
@@ -140,15 +141,15 @@
                     <div class="info_section">
                         <section class="graph-circle">
                             <div class="circle-graph-container">
-                                <div class="circle-graph easyPieChart" data-percent="{{ probability }}"
+                                <div class="circle-graph easyPieChart" data-percent="{{ probability|floatformat:2 }}"
                                      style="width: 150px; height: 150px; line-height: 150px;">
-                                    <p>{{ probability }}%</p>
+                                    <p>{{ probability |floatformat:2}}%</p>
                                     <canvas width="269" height="269" style="width: 150px; height: 150px;"></canvas>
                                 </div>
                                 <div class="stats easyPieChart"
                                      style="width: 150px; height: 150px; line-height: 150px;">
                                     <p class="stat-1">
-                                        PATIENT HAS <span class="info_section_wordHighlight">{{ probability }}% </span>OF
+                                        PATIENT HAS <span class="info_section_wordHighlight">{{ probability|floatformat:2 }}%  </span>OF
                                         CHANCE TO HAVE {{ prediction }} TYPE DEMENTIA
                                     </p>
                                 </div>
@@ -261,7 +262,7 @@
 
                         <div class="row">
                             <div class="col-sm-3"><h6 class="mb-0">Probability</h6></div>
-                            <div class="col-sm-9 text-secondary"> {{ probability }}</div>
+                            <div class="col-sm-9 text-secondary"> {{ probability|floatformat:2 }}</div>
                         </div>
 
 
@@ -286,5 +287,7 @@
         });
     });
 </script>
+
+
 </body>
 </html>

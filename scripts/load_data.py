@@ -37,7 +37,7 @@ def run():
                                    whole_brain=row[15],
                                    entorhinal=row[16],
                                    fusiform=row[17],
-                                   midtemp=row[18],
+                                   mid_temp=row[18],
                                    icv=row[19],
                                    diagnosis=row[20])
             record.save()
