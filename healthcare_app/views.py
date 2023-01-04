@@ -20,6 +20,13 @@ from scripts import eval
 from healthcare_app.forms import MainForm
 
 
+def get_similar_patients(patient_record, tolerance):
+    return Health_Record.objects\
+        .filter(mmse__range=(patient_record.mmse - tolerance, patient_record.mmse + tolerance))\
+        .filter(adas11__range=(patient_record.adas11 - tolerance, patient_record.adas11 + tolerance))\
+        .filter(adas13__range=(patient_record.adas13 - tolerance, patient_record.adas13 + tolerance))\
+        .filter(gender=patient_record.gender)
+
 def home_view(request):
     return render(request, 'home.html')
 
@@ -72,10 +79,9 @@ def results_view(request, patient_record_id):
     else:
         probability = 0
         prediction = "No Prediction Data"
-    records = Health_Record.objects\
-        .filter(prediction=patient_record.prediction)\
-        .filter(diagnosis=prediction)\
-        .filter(probability__gte=.99)
+
+    records = get_similar_patients(patient_record, 3)
+
 
     context = {
         'patient_record': patient_record,
