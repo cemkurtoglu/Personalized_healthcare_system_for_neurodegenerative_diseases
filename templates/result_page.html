@@ -49,8 +49,9 @@
             <th data-field="{{ field_names.24 }}" data-filter-control="input" data-sortable="true">{{ field_names.24 }}</th>
             <th data-field="{{ field_names.25 }}" data-filter-control="input" data-sortable="true">{{ field_names.25 }}</th>
             <th data-field="{{ field_names.23 }}" data-filter-control="input" data-sortable="true">{{ field_names.23 }}</th>
-            <th data-field="{{ field_names.2 }}" data-filter-control="input" data-sortable="true">{{ field_names.2 }}</th>
-            <th data-field="{{ field_names.3 }}" data-filter-control="input" data-sortable="true">{{ field_names.3 }}</th>
+            <th data-field="{{ field_names.9 }}" data-filter-control="input" data-sortable="true">{{ field_names.9 }}</th>
+            <th data-field="{{ field_names.10 }}" data-filter-control="input" data-sortable="true">{{ field_names.10 }}</th>
+            <th data-field="{{ field_names.11 }}" data-filter-control="input" data-sortable="true">{{ field_names.11 }}</th>
 
 
         </tr>
@@ -66,28 +67,9 @@
                 <td>{{ record.prediction | get_prediction_name }}</td>
                 <td>{% widthratio record.probability 1 100 %}</td>
                 <td>{{ record.diagnosis }}</td>
-                <td>{{ record.first_name }}</td>
-                <td>{{ record.last_name }}</td>
-{#                <td>{{ record.birth_date }}</td>#}
-{#                <td>{{ record.gender }}</td>#}
-{#                <td>{{ record.marital_status }}</td>#}
-{#                <td>{{ record.exam_date }}</td>#}
-{#                <td>{{ record.cdrsb }}</td>#}
-{#                <td>{{ record.adas11 }}</td>#}
-{#                <td>{{ record.adas13 }}</td>#}
-{#                <td>{{ record.mmse }}</td>#}
-{#                <td>{{ record.ravlt_immediate }}</td>#}
-{#                <td>{{ record.ravlt_learning }}</td>#}
-{#                <td>{{ record.ravlt_forgetting }}</td>#}
-{#                <td>{{ record.faq }}</td>#}
-{#                <td>{{ record.ventricles }}</td>#}
-{#                <td>{{ record.hippocampus }}</td>#}
-{#                <td>{{ record.whole_brain }}</td>#}
-{#                <td>{{ record.entorhinal }}</td>#}
-{#                <td>{{ record.fusiform }}</td>#}
-{#                <td>{{ record.mid_temp }}</td>#}
-{#                <td>{{ record.icv }}</td>#}
-
+                <td>{{ record.adas11 }}</td>
+                <td>{{ record.adas13 }}</td>
+                <td>{{ record.mmse }}</td>
 
             </tr>
 
