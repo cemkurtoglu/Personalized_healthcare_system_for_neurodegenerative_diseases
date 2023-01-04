@@ -16,6 +16,7 @@ services:
       sh -c "python ./wait_for_db.py &&
              python ./manage.py makemigrations &&
              python ./manage.py migrate &&
+             echo "yes" | python ./manage.py collectstatic &&
              python ./manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./Personalized_healthcare_system_for_neurodegenerative_diseases:/Personalized_healthcare_system_for_neurodegenerative_diseases
